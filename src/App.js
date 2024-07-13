@@ -16,46 +16,158 @@ import './App.css'
 
 // Replace your code here
 class App extends Component {
-  state = {isDarkMode: false, activeTab: 'Home', showBanner: true}
+  state = {
+    isDarkMode: false,
+    showBanner: true,
+    likedVideos: [],
+    disLikedVideos: [],
+    savedVideos: [],
+    likedVideosIds: [],
+    disLikedVideosIds: [],
+    savedVideosIds: [],
+  }
 
   changeMode = () => {
     this.setState(previousState => ({isDarkMode: !previousState.isDarkMode}))
-  }
-
-  toHome = () => {
-    this.setState({activeTab: 'Home'})
-  }
-
-  toTrending = () => {
-    this.setState({activeTab: 'Trending'})
-  }
-
-  toGames = () => {
-    this.setState({activeTab: 'Games'})
-  }
-
-  toSavedVideos = () => {
-    this.setState({activeTab: 'SavedVideos'})
   }
 
   clickedCross = () => {
     this.setState({showBanner: false})
   }
 
+  clickedLike = video => {
+    const {
+      likedVideosIds,
+      likedVideos,
+      disLikedVideos,
+      disLikedVideosIds,
+    } = this.state
+
+    if (!likedVideosIds.includes(video.id)) {
+      const updatedLikedVideosIds = [...likedVideosIds, video.id]
+      const updatedLikedVideos = [...likedVideos, video]
+
+      const updatedDisLikedVideos = disLikedVideos.filter(
+        eachItem => !(video.id === eachItem.id),
+      )
+      const updatedDisLikedVideosIds = disLikedVideosIds.filter(
+        eachItem => !(video.id === eachItem),
+      )
+
+      this.setState({
+        likedVideos: [...updatedLikedVideos],
+        likedVideosIds: [...updatedLikedVideosIds],
+        disLikedVideos: [...updatedDisLikedVideos],
+        disLikedVideosIds: [...updatedDisLikedVideosIds],
+      })
+    } else {
+      const updatedLikedVideosIds = likedVideosIds.filter(
+        eachItem => !(video.id === eachItem),
+      )
+      const updatedLikedVideos = likedVideos.filter(
+        eachItem => !(video.id === eachItem.id),
+      )
+
+      this.setState({
+        likedVideosIds: [...updatedLikedVideosIds],
+        likedVideos: [...updatedLikedVideos],
+      })
+    }
+  }
+
+  clickedDisLike = video => {
+    const {
+      disLikedVideos,
+      disLikedVideosIds,
+      likedVideosIds,
+      likedVideos,
+    } = this.state
+
+    if (!disLikedVideosIds.includes(video.id)) {
+      const updatedDisLikedVideosIds = [...disLikedVideosIds, video.id]
+      const updatedDisLikedVideos = [...disLikedVideos, video]
+
+      const updatedLikedVideos = likedVideos.filter(
+        eachItem => !(video.id === eachItem.id),
+      )
+      const updatedLikedVideosIds = likedVideosIds.filter(
+        eachItem => !(video.id === eachItem),
+      )
+
+      this.setState({
+        disLikedVideos: [...updatedDisLikedVideos],
+        disLikedVideosIds: [...updatedDisLikedVideosIds],
+        likedVideos: [...updatedLikedVideos],
+        likedVideosIds: [...updatedLikedVideosIds],
+      })
+    } else {
+      const updatedDisLikedVideosIds = disLikedVideosIds.filter(
+        eachItem => !(video.id === eachItem),
+      )
+      const updatedDisLikedVideos = disLikedVideos.filter(
+        eachItem => !(video.id === eachItem.id),
+      )
+
+      this.setState({
+        disLikedVideosIds: [...updatedDisLikedVideosIds],
+        disLikedVideos: [...updatedDisLikedVideos],
+      })
+    }
+  }
+
+  clickedSave = video => {
+    const {savedVideosIds, savedVideos} = this.state
+
+    if (!savedVideosIds.includes(video.id)) {
+      const updatedSavedVideosIds = [...savedVideosIds, video.id]
+      const updatedSavedVideos = [...savedVideos, video]
+
+      this.setState({
+        savedVideos: [...updatedSavedVideos],
+        savedVideosIds: [...updatedSavedVideosIds],
+      })
+    } else {
+      const updatedSavedVideosIds = savedVideosIds.filter(
+        eachItem => !(video.id === eachItem),
+      )
+      const updatedSavedVideos = savedVideos.filter(
+        eachItem => !(video.id === eachItem.id),
+      )
+
+      this.setState({
+        savedVideosIds: [...updatedSavedVideosIds],
+        savedVideos: [...updatedSavedVideos],
+      })
+    }
+  }
+
   render() {
-    const {isDarkMode, activeTab, showBanner} = this.state
+    const {
+      isDarkMode,
+      showBanner,
+      likedVideos,
+      disLikedVideos,
+      savedVideos,
+      likedVideosIds,
+      disLikedVideosIds,
+      savedVideosIds,
+    } = this.state
     return (
       <Context.Provider
         value={{
           isDarkMode,
           changeMode: this.changeMode,
-          activeTab,
-          toHome: this.toHome,
-          toTrending: this.toTrending,
-          toGames: this.toGames,
-          toSavedVideos: this.toSavedVideos,
-          showBanner,
           clickedCross: this.clickedCross,
+          showBanner,
+          likedVideos,
+          disLikedVideos,
+          savedVideos,
+          onClickLike: this.clickedLike,
+          onClickDisLike: this.clickedDisLike,
+          onClickSave: this.clickedSave,
+          likedVideosIds,
+          disLikedVideosIds,
+          savedVideosIds,
         }}
       >
         <Switch>
@@ -64,7 +176,7 @@ class App extends Component {
           <ProtectedRoute exact path="/trending" component={Trending} />
           <ProtectedRoute exact path="/gaming" component={Gaming} />
           <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
-          <ProtectedRoute exact path="/video/:id" component={VideoDetails} />
+          <ProtectedRoute exact path="/videos/:id" component={VideoDetails} />
           <Route path="/not-found" component={NotFound} />
           <Redirect to="not-found" />
         </Switch>

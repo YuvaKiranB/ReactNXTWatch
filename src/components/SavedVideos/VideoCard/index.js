@@ -1,8 +1,6 @@
 import {Link, withRouter} from 'react-router-dom'
 import {BsDot} from 'react-icons/bs'
 
-import {formatDistanceToNow} from 'date-fns'
-
 import {
   CardContainer,
   DescriptionContainer,
@@ -14,6 +12,8 @@ import {
   TagsContainer,
   TagName,
   DotContainer,
+  DotContainer2,
+  ReviewAndDurationContainer,
 } from './styling'
 import './index.css'
 
@@ -23,7 +23,6 @@ const GetVideoCard = props => {
   const {content} = props
   const {id, title, thumbnailUrl, channel, viewCount, publishedAt} = content
   const {name, profileImageUrl} = channel
-  const duration = formatDistanceToNow(new Date(publishedAt))
 
   return (
     <Context.Consumer>
@@ -41,18 +40,20 @@ const GetVideoCard = props => {
                   <Title isDarkMode={isDarkMode}>{title}</Title>
                   <TagsContainer>
                     <TagName isDarkMode={isDarkMode}>{name}</TagName>
-                    <DotContainer isDarkMode={isDarkMode}>
-                      <BsDot className="dot" />
-                    </DotContainer>
+                    <ReviewAndDurationContainer>
+                      <DotContainer2 isDarkMode={isDarkMode}>
+                        <BsDot className="dot" />
+                      </DotContainer2>
 
-                    <TagName isDarkMode={isDarkMode}>{viewCount}</TagName>
-                    <DotContainer isDarkMode={isDarkMode}>
-                      <BsDot className="dot" />
-                    </DotContainer>
+                      <TagName isDarkMode={isDarkMode}>{viewCount}</TagName>
+                      <DotContainer isDarkMode={isDarkMode}>
+                        <BsDot className="dot" />
+                      </DotContainer>
 
-                    <TagName
-                      isDarkMode={isDarkMode}
-                    >{`${duration} ago`}</TagName>
+                      <TagName
+                        isDarkMode={isDarkMode}
+                      >{`${publishedAt} ago`}</TagName>
+                    </ReviewAndDurationContainer>
                   </TagsContainer>
                 </TextContainer>
               </DescriptionContainer>

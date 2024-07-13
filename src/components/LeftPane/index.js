@@ -21,32 +21,24 @@ import {
 
 import './index.css'
 
-const LeftPane = () => (
+const LeftPane = props => (
   <Context.Consumer>
     {value => {
-      const {
-        activeTab,
-        isDarkMode,
-        toHome,
-        toTrending,
-        toGames,
-        toSavedVideos,
-      } = value
+      const {isDarkMode} = value
 
-      const isHomeActive = activeTab === 'Home'
-      const isTrendingActive = activeTab === 'Trending'
-      const isGamingActive = activeTab === 'Games'
-      const isSavedVideosActive = activeTab === 'SavedVideos'
+      const {match} = props
+      const {path} = match
+
+      const isHomeActive = path === '/'
+      const isTrendingActive = path === '/trending'
+      const isGamingActive = path === '/gaming'
+      const isSavedVideosActive = path === '/saved-videos'
 
       return (
         <LeftPaneContainer isDarkMode={isDarkMode}>
           <Part1>
             <Link to="/" className="link">
-              <TabButton
-                onClick={toHome}
-                isActive={isHomeActive}
-                isDarkMode={isDarkMode}
-              >
+              <TabButton isActive={isHomeActive} isDarkMode={isDarkMode}>
                 <AiFillHome />
                 <Description isActive={isHomeActive} isDarkMode={isDarkMode}>
                   Home
@@ -55,11 +47,7 @@ const LeftPane = () => (
             </Link>
 
             <Link to="/trending" className="link">
-              <TabButton
-                onClick={toTrending}
-                isActive={isTrendingActive}
-                isDarkMode={isDarkMode}
-              >
+              <TabButton isActive={isTrendingActive} isDarkMode={isDarkMode}>
                 <HiFire />
                 <Description
                   isActive={isTrendingActive}
@@ -71,11 +59,7 @@ const LeftPane = () => (
             </Link>
 
             <Link to="/gaming" className="link">
-              <TabButton
-                onClick={toGames}
-                isActive={isGamingActive}
-                isDarkMode={isDarkMode}
-              >
+              <TabButton isActive={isGamingActive} isDarkMode={isDarkMode}>
                 <SiYoutubegaming />
                 <Description isActive={isGamingActive} isDarkMode={isDarkMode}>
                   Gaming
@@ -84,11 +68,7 @@ const LeftPane = () => (
             </Link>
 
             <Link to="/saved-videos" className="link">
-              <TabButton
-                onClick={toSavedVideos}
-                isActive={isSavedVideosActive}
-                isDarkMode={isDarkMode}
-              >
+              <TabButton isActive={isSavedVideosActive} isDarkMode={isDarkMode}>
                 <MdPlaylistAdd />
                 <Description
                   isActive={isSavedVideosActive}

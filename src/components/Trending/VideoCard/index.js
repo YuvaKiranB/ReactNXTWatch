@@ -14,6 +14,8 @@ import {
   TagsContainer,
   TagName,
   DotContainer,
+  DotContainer2,
+  ReviewAndDurationContainer,
 } from './styling'
 import './index.css'
 
@@ -41,18 +43,20 @@ const GetVideoCard = props => {
                   <Title isDarkMode={isDarkMode}>{title}</Title>
                   <TagsContainer>
                     <TagName isDarkMode={isDarkMode}>{name}</TagName>
-                    <DotContainer isDarkMode={isDarkMode}>
-                      <BsDot className="dot" />
-                    </DotContainer>
+                    <ReviewAndDurationContainer>
+                      <DotContainer2 isDarkMode={isDarkMode}>
+                        <BsDot className="dot" />
+                      </DotContainer2>
 
-                    <TagName isDarkMode={isDarkMode}>{viewCount}</TagName>
-                    <DotContainer isDarkMode={isDarkMode}>
-                      <BsDot className="dot" />
-                    </DotContainer>
+                      <TagName isDarkMode={isDarkMode}>{viewCount}</TagName>
+                      <DotContainer isDarkMode={isDarkMode}>
+                        <BsDot className="dot" />
+                      </DotContainer>
 
-                    <TagName
-                      isDarkMode={isDarkMode}
-                    >{`${duration} ago`}</TagName>
+                      <TagName
+                        isDarkMode={isDarkMode}
+                      >{`${duration} ago`}</TagName>
+                    </ReviewAndDurationContainer>
                   </TagsContainer>
                 </TextContainer>
               </DescriptionContainer>

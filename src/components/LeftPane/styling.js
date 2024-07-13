@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const LeftPaneContainer = styled.div`
-  width: 18%;
+  width: 16vw;
   padding-top: 30px;
   height: 90vh;
   background-color: ${props => (props.isDarkMode ? '#313131' : 'transparent')};
