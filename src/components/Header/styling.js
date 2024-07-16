@@ -39,28 +39,6 @@ export const ThemeSwitchButton = styled.button`
   }
 `
 
-export const HamburgerButton = styled.button`
-  margin-right: 10px;
-  height: 40px;
-  width: 40px;
-  font-size: 30px;
-  background-color: transparent;
-  border-width: 0px;
-  cursor: pointer;
-  color: ${props => props.color};
-`
-
-export const LogoutButton = styled.button`
-  margin-right: 5px;
-  height: 40px;
-  width: 40px;
-  font-size: 30px;
-  background-color: transparent;
-  border-width: 0px;
-  cursor: pointer;
-  color: ${props => props.color};
-`
-
 export const ButtonsContainerLarge = styled.div`
   display: flex;
   flex-direction: row;

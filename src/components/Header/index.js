@@ -1,10 +1,10 @@
 import {withRouter} from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import {FaMoon} from 'react-icons/fa'
 import {IoSunnyOutline} from 'react-icons/io5'
-import {GiHamburgerMenu} from 'react-icons/gi'
-import {FiLogOut} from 'react-icons/fi'
+
+import GetHamburgerButton from './HamburgerPopup'
+import GetLogoutButtonSmall from './LogoutPopupSmall'
 
 import Context from '../../Context'
 
@@ -13,8 +13,6 @@ import {
   WebsiteLogo,
   IconsContainer,
   ThemeSwitchButton,
-  HamburgerButton,
-  LogoutButton,
   ButtonsContainerLarge,
   LogoutButtonLarge,
   ProfileButton,
@@ -26,12 +24,7 @@ const Header = props => (
     {value => {
       const {isDarkMode, changeMode} = value
 
-      const logout = () => {
-        const {history} = props
-        Cookies.remove('jwt_token')
-        history.replace('/login')
-        console.log(history)
-      }
+      const logout = () => {}
 
       return (
         <HeaderContainer backgroundColor={isDarkMode ? '#313131' : 'white'}>
@@ -55,19 +48,9 @@ const Header = props => (
             >
               {isDarkMode ? <IoSunnyOutline /> : <FaMoon />}
             </ThemeSwitchButton>
-            <HamburgerButton
-              type="button"
-              color={isDarkMode ? 'white' : 'black'}
-            >
-              <GiHamburgerMenu />
-            </HamburgerButton>
-            <LogoutButton
-              onClick={logout}
-              type="button"
-              color={isDarkMode ? 'white' : 'black'}
-            >
-              <FiLogOut />
-            </LogoutButton>
+            <GetHamburgerButton />
+
+            <GetLogoutButtonSmall />
           </IconsContainer>
 
           <ButtonsContainerLarge>

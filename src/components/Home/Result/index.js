@@ -13,6 +13,11 @@ import {
   SearchInput,
   SearchButton,
   CardsList,
+  NoResultContainer,
+  NoResultImage,
+  NoResultPara1,
+  NoResultPara2,
+  RetryButton,
 } from './styling'
 
 const apiStatusConstants = {
@@ -34,6 +39,10 @@ class ResultContainer extends Component {
       searchInput: event.target.value,
       cardsApiStaus: apiStatusConstants.initial,
     })
+  }
+
+  updateSearchInput = () => {
+    this.getCards()
   }
 
   changeSearchInput2 = event => {
@@ -81,6 +90,30 @@ class ResultContainer extends Component {
     }
   }
 
+  renderNoResult = isDarkMode => {
+    console.log(isDarkMode)
+
+    return (
+      <NoResultContainer>
+        <NoResultImage
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+          alt="no videos"
+        />
+        <NoResultPara1 isDarkMode={isDarkMode}>
+          No Search results found
+        </NoResultPara1>
+        <NoResultPara2 isDarkMode={isDarkMode}>
+          Try different key words or remove search filter
+        </NoResultPara2>
+        <RetryButton onClick={this.retry}>Retry</RetryButton>
+      </NoResultContainer>
+    )
+  }
+
+  retry = () => {
+    this.setState({searchInput: ''}, this.getCards)
+  }
+
   render() {
     const {cardsApiStatus, searchInput, cardsList} = this.state
 
@@ -110,9 +143,11 @@ class ResultContainer extends Component {
 
               {cardsApiStatus === apiStatusConstants.success && (
                 <CardsList>
-                  {cardsList.map(eachItem => (
-                    <GetVideoCard key={eachItem.id} content={eachItem} />
-                  ))}
+                  {cardsList.length === 0
+                    ? this.renderNoResult({isDarkMode})
+                    : cardsList.map(eachItem => (
+                        <GetVideoCard key={eachItem.id} content={eachItem} />
+                      ))}
                 </CardsList>
               )}
             </MainContainer>
