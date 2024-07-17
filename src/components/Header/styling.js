@@ -48,24 +48,6 @@ export const ButtonsContainerLarge = styled.div`
   }
 `
 
-export const LogoutButtonLarge = styled.button`
-  padding: 2px;
-  padding-bottom: 3px;
-  font-family: roboto;
-  font-size: 14px;
-  padding-left: 10px;
-  margin: 0px;
-  padding-right: 10px;
-  margin-right: 20px;
-  color: ${props => props.color};
-  background-color: transparent;
-  border: 1px solid ${props => props.color};
-  border-radius: 2px;
-  font-weight: 500;
-  cursor: pointer;
-  align-self: center;
-`
-
 export const ProfileButton = styled.button`
   background-color: transparent;
   border-width: 0px;

@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const VideoDetailsContainer = styled.div`
   width: 100vw;
-  background-color: ${props => (props.isDarkMode ? '#0f0f0f' : '#ebebeb')};
+  background-color: ${props => (props.isDarkMode ? '#0f0f0f' : '#f9f9f9')};
+  min-height: 100vh;
 `
 
 export const ContentContainer = styled.div`
@@ -71,7 +72,7 @@ export const LikeButton = styled.button`
   padding: 0px;
   height: 30px;
   font-size: 24px;
-  color: ${props => (props.isLiked ? '#3b82f6' : '#7e858e')};
+  color: ${props => (props.isLiked ? '#2563eb' : '#64748b ')};
   background-color: transparent;
   border-width: 0px;
   font-weight: 500;
@@ -87,7 +88,7 @@ export const DisLikeButton = styled.button`
   padding: 0px;
   height: 30px;
   font-size: 24px;
-  color: ${props => (props.isDisLiked ? '#3b82f6' : '#7e858e')};
+  color: ${props => (props.isDisLiked ? '#2563eb' : '#64748b')};
   background-color: transparent;
   border-width: 0px;
   font-weight: 500;
@@ -103,7 +104,7 @@ export const SaveButton = styled.button`
   padding: 0px;
   height: 30px;
   font-size: 24px;
-  color: ${props => (props.isSaved ? '#3b82f6' : '#7e858e')};
+  color: ${props => (props.isSaved ? '#2563eb' : '#64748b')};
   background-color: transparent;
   border-width: 0px;
   font-weight: 500;
@@ -165,4 +166,12 @@ export const LargeInfoContainer = styled.div`
     align-items: center;
     justify-content: space-between;
   }
+`
+export const LoaderContainer = styled.div`
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `

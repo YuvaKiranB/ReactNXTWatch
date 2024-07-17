@@ -5,6 +5,7 @@ import {IoSunnyOutline} from 'react-icons/io5'
 
 import GetHamburgerButton from './HamburgerPopup'
 import GetLogoutButtonSmall from './LogoutPopupSmall'
+import GetLogoutButtonLarge from './LogoutPopupLarge'
 
 import Context from '../../Context'
 
@@ -14,29 +15,26 @@ import {
   IconsContainer,
   ThemeSwitchButton,
   ButtonsContainerLarge,
-  LogoutButtonLarge,
   ProfileButton,
   ProfileImage,
 } from './styling'
 
-const Header = props => (
+const Header = () => (
   <Context.Consumer>
     {value => {
       const {isDarkMode, changeMode} = value
-
-      const logout = () => {}
 
       return (
         <HeaderContainer backgroundColor={isDarkMode ? '#313131' : 'white'}>
           {isDarkMode ? (
             <WebsiteLogo
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
-              alt="website logo"
+              alt="nxt watch logo"
             />
           ) : (
             <WebsiteLogo
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-              alt="website logo"
+              alt="nxt watch logo"
             />
           )}
 
@@ -45,6 +43,7 @@ const Header = props => (
               type="button"
               onClick={changeMode}
               color={isDarkMode ? 'white' : 'black'}
+              data-testid="theme"
             >
               {isDarkMode ? <IoSunnyOutline /> : <FaMoon />}
             </ThemeSwitchButton>
@@ -58,6 +57,7 @@ const Header = props => (
               type="button"
               onClick={changeMode}
               color={isDarkMode ? 'white' : 'black'}
+              data-testid="theme"
             >
               {isDarkMode ? <IoSunnyOutline /> : <FaMoon />}
             </ThemeSwitchButton>
@@ -67,13 +67,7 @@ const Header = props => (
                 alt="profile"
               />
             </ProfileButton>
-            <LogoutButtonLarge
-              onClick={logout}
-              type="button"
-              color={isDarkMode ? 'white' : '#3b82f6'}
-            >
-              Logout
-            </LogoutButtonLarge>
+            <GetLogoutButtonLarge />
           </ButtonsContainerLarge>
         </HeaderContainer>
       )

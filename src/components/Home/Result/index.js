@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner'
 import {BsSearch} from 'react-icons/bs'
 import Cookies from 'js-cookie'
 import GetVideoCard from '../VideoCard'
+import ErrorCard from '../../ErrorComponent'
 
 import Context from '../../../Context'
 
@@ -18,6 +19,7 @@ import {
   NoResultPara1,
   NoResultPara2,
   RetryButton,
+  LoaderContainer,
 } from './styling'
 
 const apiStatusConstants = {
@@ -28,7 +30,7 @@ const apiStatusConstants = {
 }
 
 class ResultContainer extends Component {
-  state = {searchInput: ''}
+  state = {searchInput: '', cardsApiStatus: apiStatusConstants.initial}
 
   componentDidMount() {
     this.getCards()
@@ -37,7 +39,6 @@ class ResultContainer extends Component {
   changeSearchInput = event => {
     this.setState({
       searchInput: event.target.value,
-      cardsApiStaus: apiStatusConstants.initial,
     })
   }
 
@@ -90,25 +91,21 @@ class ResultContainer extends Component {
     }
   }
 
-  renderNoResult = isDarkMode => {
-    console.log(isDarkMode)
-
-    return (
-      <NoResultContainer>
-        <NoResultImage
-          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
-          alt="no videos"
-        />
-        <NoResultPara1 isDarkMode={isDarkMode}>
-          No Search results found
-        </NoResultPara1>
-        <NoResultPara2 isDarkMode={isDarkMode}>
-          Try different key words or remove search filter
-        </NoResultPara2>
-        <RetryButton onClick={this.retry}>Retry</RetryButton>
-      </NoResultContainer>
-    )
-  }
+  renderNoResult = isDarkMode => (
+    <NoResultContainer>
+      <NoResultImage
+        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+        alt="no videos"
+      />
+      <NoResultPara1 isDarkMode={isDarkMode}>
+        No Search results found
+      </NoResultPara1>
+      <NoResultPara2 isDarkMode={isDarkMode}>
+        Try different key words or remove search filter
+      </NoResultPara2>
+      <RetryButton onClick={this.retry}>Retry</RetryButton>
+    </NoResultContainer>
+  )
 
   retry = () => {
     this.setState({searchInput: ''}, this.getCards)
@@ -131,11 +128,13 @@ class ResultContainer extends Component {
                   value={searchInput}
                   onChange={this.changeSearchInput}
                   onKeyDown={this.changeSearchInput2}
+                  isDarkMode={isDarkMode}
                 />
                 <SearchButton
                   isDarkMode={isDarkMode}
                   onClick={this.updateSearchInput}
                   type="button"
+                  data-testid="searchButton"
                 >
                   <BsSearch />
                 </SearchButton>
@@ -144,11 +143,27 @@ class ResultContainer extends Component {
               {cardsApiStatus === apiStatusConstants.success && (
                 <CardsList>
                   {cardsList.length === 0
-                    ? this.renderNoResult({isDarkMode})
+                    ? this.renderNoResult(isDarkMode)
                     : cardsList.map(eachItem => (
                         <GetVideoCard key={eachItem.id} content={eachItem} />
                       ))}
                 </CardsList>
+              )}
+              {cardsApiStatus === apiStatusConstants.inProgress && (
+                <LoaderContainer>
+                  <div className="loader-container" data-testid="loader">
+                    <Loader
+                      type="ThreeDots"
+                      color="#3b82f6"
+                      height="50"
+                      width="50"
+                    />
+                  </div>
+                </LoaderContainer>
+              )}
+
+              {cardsApiStatus === apiStatusConstants.failure && (
+                <ErrorCard clickedRetry={this.retry} />
               )}
             </MainContainer>
           )

@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const MainContainer = styled.div`
   background-color: ${props => (props.isDarkMode ? '#0f0f0f' : '#f9f9f9')};
+  min-height: 100vh;
 `
 
 export const SearchBar = styled.div`
@@ -23,6 +24,7 @@ export const SearchInput = styled.input`
   border-bottom-left-radius: 5 px;
   outline: none;
   background-color: transparent;
+  color: ${props => (props.isDarkMode ? 'white' : 'black')};
 `
 
 export const SearchButton = styled.button`
@@ -90,4 +92,13 @@ export const RetryButton = styled.button`
   font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
+`
+
+export const LoaderContainer = styled.div`
+  height: 70vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `

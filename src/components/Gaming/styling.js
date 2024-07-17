@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const GamingContainer = styled.div`
   background-color: ${props => (props.isDarkMode ? '#0f0f0f' : '#f9f9f9')};
+  min-height: 100vh;
 `
 
 export const ContentContainer = styled.div`
@@ -53,4 +54,12 @@ export const CardsList = styled.ul`
 
 export const RightPane = styled.div`
   width: 100%;
+`
+export const LoaderContainer = styled.div`
+  height: 70vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `

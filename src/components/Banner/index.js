@@ -1,6 +1,6 @@
 import {IoMdClose} from 'react-icons/io'
 
-import Context from '../../../Context'
+import Context from '../../Context'
 
 import {
   BannerCard,
@@ -15,10 +15,9 @@ import {
 const Banner = () => (
   <Context.Consumer>
     {value => {
-      const {isDarkMode, showBanner, clickedCross} = value
-      console.log(isDarkMode)
+      const {showBanner, clickedCross} = value
       return (
-        <BannerCard showBanner={showBanner}>
+        <BannerCard showBanner={showBanner} data-testid="banner">
           <ContentContainer>
             <LogoImage
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
@@ -30,7 +29,11 @@ const Banner = () => (
             <GetItButton type="button">GET IT NOW</GetItButton>
           </ContentContainer>
           <CloseContainer>
-            <CloseButton type="button" onClick={clickedCross}>
+            <CloseButton
+              type="button"
+              onClick={clickedCross}
+              data-testid="close"
+            >
               <IoMdClose />
             </CloseButton>
           </CloseContainer>

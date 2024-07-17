@@ -8,6 +8,7 @@ import {BiLike, BiDislike} from 'react-icons/bi'
 import {MdPlaylistAdd} from 'react-icons/md'
 import Context from '../../Context'
 import LeftPane from '../LeftPane'
+import ErrorCard from '../ErrorComponent'
 
 import {
   VideoDetailsContainer,
@@ -32,6 +33,7 @@ import {
   RightPane,
   Content,
   LargeInfoContainer,
+  LoaderContainer,
 } from './styling'
 
 import Header from '../Header'
@@ -94,6 +96,10 @@ class VideoDetails extends Component {
     }
   }
 
+  retry = () => {
+    this.getVideoData()
+  }
+
   render() {
     const {videoDetails, pageStatus} = this.state
     const {
@@ -135,7 +141,10 @@ class VideoDetails extends Component {
             onClickSave(videoDetails)
           }
           return (
-            <VideoDetailsContainer isDarkMode={isDarkMode}>
+            <VideoDetailsContainer
+              isDarkMode={isDarkMode}
+              data-testid="videoItemDetails"
+            >
               <Header />
               <Content>
                 <LeftPane />
@@ -204,6 +213,23 @@ class VideoDetails extends Component {
                         </ChannelText>
                       </DescriptionContainer>
                     </ContentContainer>
+                  )}
+
+                  {pageStatus === apiStatusConstants.process && (
+                    <LoaderContainer>
+                      <div className="loader-container" data-testid="loader">
+                        <Loader
+                          type="ThreeDots"
+                          color="#3b82f6"
+                          height="50"
+                          width="50"
+                        />
+                      </div>
+                    </LoaderContainer>
+                  )}
+
+                  {pageStatus === apiStatusConstants.failure && (
+                    <ErrorCard clickedRetry={this.retry} />
                   )}
                 </RightPane>
               </Content>

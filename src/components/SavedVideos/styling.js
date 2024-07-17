@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const SavedVideosContainer = styled.div`
-  background-color: ${props => (props.isDarkMode ? '#0f0f0f' : '#f9f9f9')};
+  background-color: ${props => (props.isDarkMode ? '#0f0f0f' : '#f1f1f1')};
+  min-height: 100vh;
 `
 
 export const ContentContainer = styled.div`
@@ -47,4 +48,32 @@ export const CardsList = styled.ul`
 
 export const RightPane = styled.div`
   width: 100%;
+`
+export const NoSavedVideosContainer = styled.div`
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const NoSavedVideosImage = styled.img`
+  width: 90%;
+  margin-bottom: 40px;
+  @media (min-width: 768px) {
+    width: 50%;
+  }
+`
+
+export const NoSavedVideosHeading = styled.h1`
+  font-family: roboto;
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: ${props => (props.isDarkMode ? '#f1f1f1' : '#0f0f0f')};
+`
+
+export const NoSavedVideosPara = styled.p`
+  font-family: roboto;
+  font-size: 18px;
+  color: ${props => (props.isDarkMode ? '#d7dfe9' : '#475569')};
 `

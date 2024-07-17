@@ -5,6 +5,8 @@ import {HiFire} from 'react-icons/hi'
 import GetVideoCard from './VideoCard'
 import Header from '../Header'
 import LeftPane from '../LeftPane'
+import ErrorCard from '../ErrorComponent'
+import Banner from '../Banner'
 
 import {
   TrendingContainer,
@@ -14,6 +16,7 @@ import {
   TrendingHeading,
   CardsList,
   RightPane,
+  LoaderContainer,
 } from './styling'
 
 import Context from '../../Context'
@@ -71,6 +74,10 @@ class Trending extends Component {
     }
   }
 
+  retry = () => {
+    this.getCards()
+  }
+
   render() {
     const {cardsApiStatus, cardsList} = this.state
 
@@ -80,7 +87,7 @@ class Trending extends Component {
           const {isDarkMode} = value
 
           return (
-            <TrendingContainer isDarkMode={isDarkMode}>
+            <TrendingContainer isDarkMode={isDarkMode} data-testid="trending">
               <Header />
               <ContentContainer>
                 <LeftPane />
@@ -93,12 +100,29 @@ class Trending extends Component {
                       Trending
                     </TrendingHeading>
                   </HeaderContainer>
+                  <Banner />
                   {cardsApiStatus === apiStatusConstants.success && (
                     <CardsList>
                       {cardsList.map(eachItem => (
                         <GetVideoCard key={eachItem.id} content={eachItem} />
                       ))}
                     </CardsList>
+                  )}
+                  {cardsApiStatus === apiStatusConstants.inProgress && (
+                    <LoaderContainer>
+                      <div className="loader-container" data-testid="loader">
+                        <Loader
+                          type="ThreeDots"
+                          color="#3b82f6"
+                          height="50"
+                          width="50"
+                        />
+                      </div>
+                    </LoaderContainer>
+                  )}
+
+                  {cardsApiStatus === apiStatusConstants.failure && (
+                    <ErrorCard clickedRetry={this.retry} />
                   )}
                 </RightPane>
               </ContentContainer>
