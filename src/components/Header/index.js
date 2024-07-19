@@ -29,12 +29,12 @@ const Header = () => (
           {isDarkMode ? (
             <WebsiteLogo
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png"
-              alt="nxt watch logo"
+              alt="website logo"
             />
           ) : (
             <WebsiteLogo
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-              alt="nxt watch logo"
+              alt="website logo"
             />
           )}
 

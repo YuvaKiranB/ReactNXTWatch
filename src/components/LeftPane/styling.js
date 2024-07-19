@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const LeftPaneContainer = styled.div`
+export const LeftPaneContainer = styled.nav`
   width: 16vw;
   padding-top: 30px;
   height: 90vh;
@@ -19,34 +19,6 @@ export const Part1 = styled.div`
   text-decoration: none;
 `
 
-export const TabButton = styled.button`
-  padding: 15px;
-  width: 100%;
-  padding-left: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 20px;
-  text-decoration: none;
-  font-family: roboto;
-  color: ${props => (props.isActive ? '#ff0b37' : '#e2e8f0')};
-  color: ${props => !props.isActive && !props.isDarkMode && '#475569'};
-  background-color: transparent;
-  border-width: 0px;
-  cursor: pointer;
-  background-color: ${props => props.isActive && props.isDarkMode && '#475569'};
-  background-color: ${props =>
-    props.isActive && !props.isDarkMode && '#e2e8f0'};
-`
-
-export const Description = styled.span`
-  margin-left: 14px;
-  color: ${props => (props.isDarkMode ? '#e2e8f0' : '#475569')};
-  color: ${props => !props.isDarkMode && props.isActive && 'black'};
-  font-weight: ${props => (props.isActive ? 500 : 400)};
-`
-
 export const Part2 = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,7 +26,7 @@ export const Part2 = styled.div`
   padding-right: 40px;
 `
 
-export const ContactUs = styled.h1`
+export const ContactUs = styled.p`
   font-family: roboto;
   font-size: 20px;
   color: ${props => (props.isDarkMode ? '#e2e8f0' : '#475569')};
@@ -77,4 +49,10 @@ export const Description2 = styled.p`
   font-family: roboto;
   font-size: 18px;
   color: ${props => (props.isDarkMode ? '#f1f5f9' : '#64748b')};
+`
+export const NavItems = styled.ul`
+  list-style: none;
+  padding-left: 0px;
+  margin-top: 0px;
+  padding-top: 0px;
 `

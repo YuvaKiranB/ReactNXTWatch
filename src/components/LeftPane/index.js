@@ -1,25 +1,26 @@
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
-import {AiFillHome} from 'react-icons/ai'
-import {HiFire} from 'react-icons/hi'
-import {SiYoutubegaming} from 'react-icons/si'
-import {MdPlaylistAdd} from 'react-icons/md'
+import GetNavItem from './GetNavItem'
 
 import Context from '../../Context'
 
 import {
   LeftPaneContainer,
   Part1,
-  TabButton,
-  Description,
   Part2,
   ContactUs,
   Icon,
   IconsContainer,
   Description2,
+  NavItems,
 } from './styling'
 
-import './index.css'
+const NavItemsList = [
+  {id: 'HOME', description: 'Home'},
+  {id: 'TRENDING', description: 'Trending'},
+  {id: 'GAMING', description: 'Gaming'},
+  {id: 'SAVED VIDEOS', description: 'Saved videos'},
+]
 
 const LeftPane = props => (
   <Context.Consumer>
@@ -28,56 +29,34 @@ const LeftPane = props => (
 
       const {match} = props
       const {path} = match
+      let activeNav = null
 
-      const isHomeActive = path === '/'
-      const isTrendingActive = path === '/trending'
-      const isGamingActive = path === '/gaming'
-      const isSavedVideosActive = path === '/saved-videos'
+      if (path === '/') {
+        activeNav = 'HOME'
+      }
+      if (path === '/trending') {
+        activeNav = 'TRENDING'
+      }
+      if (path === '/gaming') {
+        activeNav = 'GAMING'
+      }
+      if (path === '/saved-videos') {
+        activeNav = 'SAVED VIDEOS'
+      }
 
       return (
         <LeftPaneContainer isDarkMode={isDarkMode}>
           <Part1>
-            <Link to="/" className="link">
-              <TabButton isActive={isHomeActive} isDarkMode={isDarkMode}>
-                <AiFillHome />
-                <Description isActive={isHomeActive} isDarkMode={isDarkMode}>
-                  Home
-                </Description>
-              </TabButton>
-            </Link>
-
-            <Link to="/trending" className="link">
-              <TabButton isActive={isTrendingActive} isDarkMode={isDarkMode}>
-                <HiFire />
-                <Description
-                  isActive={isTrendingActive}
-                  isDarkMode={isDarkMode}
-                >
-                  Trending
-                </Description>
-              </TabButton>
-            </Link>
-
-            <Link to="/gaming" className="link">
-              <TabButton isActive={isGamingActive} isDarkMode={isDarkMode}>
-                <SiYoutubegaming />
-                <Description isActive={isGamingActive} isDarkMode={isDarkMode}>
-                  Gaming
-                </Description>
-              </TabButton>
-            </Link>
-
-            <Link to="/saved-videos" className="link">
-              <TabButton isActive={isSavedVideosActive} isDarkMode={isDarkMode}>
-                <MdPlaylistAdd />
-                <Description
-                  isActive={isSavedVideosActive}
-                  isDarkMode={isDarkMode}
-                >
-                  Saved videos
-                </Description>
-              </TabButton>
-            </Link>
+            <NavItems>
+              {NavItemsList.map(eachItem => (
+                <GetNavItem
+                  activeNav={activeNav}
+                  key={eachItem.id}
+                  description={eachItem.description}
+                  id={eachItem.id}
+                />
+              ))}
+            </NavItems>
           </Part1>
 
           <Part2>
@@ -97,7 +76,7 @@ const LeftPane = props => (
               />
             </IconsContainer>
             <Description2 isDarkMode={isDarkMode}>
-              Enjoy! Now to see your channels and recommendations
+              Enjoy! Now to see your channels and recommendations!
             </Description2>
           </Part2>
         </LeftPaneContainer>

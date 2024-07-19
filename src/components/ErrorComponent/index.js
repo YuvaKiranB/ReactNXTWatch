@@ -3,8 +3,8 @@ import Context from '../../Context'
 import {
   ErrorContainer,
   ErrorImage,
-  ErrorPara1,
-  ErrorPara2,
+  ErrorHeading,
+  ErrorPara,
   RetryButton,
 } from './styling'
 
@@ -30,13 +30,13 @@ const ErrorCard = props => {
               />
             )}
 
-            <ErrorPara1 isDarkMode={isDarkMode}>
+            <ErrorHeading isDarkMode={isDarkMode}>
               Oops! Something Went Wrong
-            </ErrorPara1>
-            <ErrorPara2 isDarkMode={isDarkMode}>
+            </ErrorHeading>
+            <ErrorPara isDarkMode={isDarkMode}>
               We are having some trouble to complete your request. Please try
               again.
-            </ErrorPara2>
+            </ErrorPara>
             <RetryButton onClick={clickedRetry}>Retry</RetryButton>
           </ErrorContainer>
         )

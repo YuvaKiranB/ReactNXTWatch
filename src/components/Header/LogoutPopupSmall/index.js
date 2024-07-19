@@ -48,7 +48,7 @@ const GetLogoutButtonSmall = props => (
             {close => (
               <SubContainer isDarkMode={isDarkMode}>
                 <ClosePara isDarkMode={isDarkMode}>
-                  Are you sure you want to logout?
+                  Are you sure, you want to logout?
                 </ClosePara>
                 <ButtonsContainer>
                   <CancelButton
